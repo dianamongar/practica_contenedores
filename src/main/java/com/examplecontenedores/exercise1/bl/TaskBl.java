@@ -10,7 +10,12 @@ import com.examplecontenedores.exercise1.dto.Task;
 @Repository
 public class TaskBl {
     List<Task> database=new ArrayList<>();
+    private int nextTaskId = 3;
     
+    public int getNextTaskId() {
+        nextTaskId++;
+        return nextTaskId;
+    }
     public TaskBl(){
         init();
     }
@@ -23,8 +28,12 @@ public class TaskBl {
 		create(task2);
 		create(task3);
     }
-    public void create(Task task){
+    
+    public Task create(Task task){
+        Task newTask=task;
+        newTask.setTaskId(getNextTaskId());
         database.add(task);
+        return newTask;
     }
     public List<Task> listAll(){
         return database;
