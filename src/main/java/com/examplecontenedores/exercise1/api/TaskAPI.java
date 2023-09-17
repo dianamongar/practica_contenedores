@@ -2,7 +2,7 @@ package com.examplecontenedores.exercise1.api;
 import java.util.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+//import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.examplecontenedores.exercise1.bl.TaskBl;
@@ -11,13 +11,13 @@ import com.examplecontenedores.exercise1.dto.Task;
 
 
 @RestController
-@RequestMapping("/api/v1/task")
+
 public class TaskAPI {
     private TaskBl taskBl;
     public TaskAPI(){
         taskBl=new TaskBl();
     }
-    @GetMapping("/holi")
+    
     public Map create(Task task){
         taskBl.create(task);
         Map result=new HashMap();
@@ -26,8 +26,10 @@ public class TaskAPI {
         result.put("errorMessage",null);
         return result;
     }
-    public List listAll(){
-        return taskBl.listAll();
+
+    @GetMapping("/api/v1/task")
+    public List<Task> listAll(){
+        return taskBl.listAll();    
     }
     public void delete(int taskId){
         taskBl.delete(taskId);
